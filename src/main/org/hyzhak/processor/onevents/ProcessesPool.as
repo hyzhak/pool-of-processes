@@ -1,4 +1,4 @@
-package org.hyzhak.processor {
+package org.hyzhak.processor.onevents {
     import flash.events.Event;
     import flash.events.IEventDispatcher;
     import flash.utils.Dictionary;
