@@ -5,7 +5,6 @@ package org.hyzhak.processor.onpromises {
     import flash.system.System;
     import flash.utils.Dictionary;
     import flash.utils.Timer;
-    import flash.utils.setTimeout;
 
     import org.flexunit.async.Async;
     import org.hamcrest.assertThat;
@@ -21,8 +20,7 @@ package org.hyzhak.processor.onpromises {
 
         [Test(async)]
         public function testDisposeOfProcess() :void {
-            var pool:ProcessesPoolOnPromise = new ProcessesPoolOnPromise();
-            var instance:FluentInterface = FluentInterface.newProcess(pool);
+            var instance:FluentInterface = FluentInterface.newProcess();
             instance.processSuccessful("Ok!").then(waitFotAMoment);
 
             _weakLink[instance] = true;
@@ -30,8 +28,6 @@ package org.hyzhak.processor.onpromises {
             var tmpInstance:* = new TestClass();
 
             _weakLink[tmpInstance] = true;
-
-            _weakLink[pool] = true;
 
             addEventListener(Event.COMPLETE, Async.asyncHandler(this, assertThatWeakLinkHasDisposed, 1000));
         }
@@ -58,10 +54,6 @@ package org.hyzhak.processor.onpromises {
 import com.codecatalyst.promise.Deferred;
 import com.codecatalyst.promise.Promise;
 
-import flash.system.System;
-
-import flash.utils.Dictionary;
-
 import org.hyzhak.processor.onpromises.ProcessOnPromise;
 import org.hyzhak.processor.onpromises.ProcessesPoolOnPromise;
 
@@ -71,10 +63,13 @@ class TestClass {
 
 class FluentInterface extends ProcessOnPromise {
 
-    public static function newProcess(pool:ProcessesPoolOnPromise):FluentInterface {
+    private static var _pool:ProcessesPoolOnPromise;
+
+    public static function newProcess():FluentInterface {
+        _pool = new ProcessesPoolOnPromise();
         var deferred:Deferred = new Deferred();
         var instance:FluentInterface = new FluentInterface(deferred);
-        pool.store(instance, deferred);
+        _pool.store(instance, deferred);
         return instance;
     }
 
