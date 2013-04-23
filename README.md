@@ -1,7 +1,7 @@
 Pool of Processes
 =================
 
-Utils library to create fluet interface based on long processes. Support Events and Promises.
+Utils library to create [fluet interface](http://en.wikipedia.org/wiki/Fluent_interface) based on long processes. Support Events and [Promises/A](https://github.com/CodeCatalyst/promise-as3).
 
 ## Use Case Example
 
@@ -46,3 +46,7 @@ class FluentInterface extends ProcessOnPromise {
 }
 
 ```
+
+# Additional info
+
+Syntax Sugar for Testing as3 Promise/A.
