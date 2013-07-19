@@ -27,7 +27,7 @@ package org.hyzhak.processor.onpromises {
         }
 
         /**
-         * Short version of function completeInAMmoment()
+         * Short version of function completeInAMoment()
          * @param result
          */
         public function resolveInAMoment(result:*):void {
